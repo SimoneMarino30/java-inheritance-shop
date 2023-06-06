@@ -33,45 +33,94 @@ import java.util.Scanner;
 public class Checkout {
     public static void main(String[] args) {
 
-
-        //Headphones earphones = new Headphones("Razer", "the best sound",99, 22, "black", true);
-        //Smartphone mobile = new Smartphone("Nokia", "indestructible", 199, 22, 12345, 64);
-        boolean smart = false;
-
         Scanner scan = new Scanner(System.in);
         // Scelta prodotto
-        System.out.println("What type of product do you want to add to your shopping cart?\n 1-Tv 2-Headphones 3-Smartphone");
+        System.out.print("What type of product do you want to add to your shopping cart?\n 1-Tv 2-Headphones 3-Smartphone  ");
         String myProductChoice = scan.nextLine();
 
         //Creazione prodotto(param del prodotto)
-        System.out.println("What is your product's name?");
+        System.out.print("What is your product's name?  ");
         String myProductName = scan.nextLine();
 
-        System.out.println("What is your product's description?");
+        System.out.print("What is your product's description?  ");
         String myProductDescription = scan.nextLine();
 
-        System.out.println("What is your product's price?");
+        System.out.print("What is your product's price?  ");
         int myProductPrice = scan.nextInt();
+        scan.nextLine(); // toglie il carattere invio (Grazie Francesco!!)
 
-        System.out.println("What is your product's vat percentage?");
+        System.out.print("What is your product's vat percentage?  ");
         int myProductVat = scan.nextInt();
+        scan.nextLine();
 
         switch (myProductChoice) {
             case "1" -> {
-                System.out.print("add your inch size: ");
+                System.out.print("add your inch size:  ");
                 int dimensionChoiced = scan.nextInt();
-                System.out.println("Is it a Smart Tv? press 1 for YES or 2 for NO");
-                boolean isSmart = scan.nextBoolean();
+                scan.nextLine();
+
+                boolean isSmart = false;
+                boolean validChoice = false;
+
+                while(!validChoice) {
+                    System.out.println("Is it a Smart Tv? press 1 for YES or 2 for NO");
+                    int choice = scan.nextInt();
+                    scan.nextLine();
+
+                    if(choice == 1) {
+                        isSmart = true;
+                        validChoice = true;
+                    }else if (choice == 2) {
+                        isSmart = false;
+                        validChoice = true;
+                    } else {
+                        System.out.println("Invalid input, please press 1 for YES or 2 for NO");
+
+                    }
+                }
+                // new TV
                 Tv tv = new Tv(myProductName, myProductDescription, myProductPrice, myProductVat, dimensionChoiced, isSmart );
                 System.out.println(tv.toString());
             }
             case "2" -> {
-                System.out.println("Option 2: ");
-                System.out.print("Headphones");
+                System.out.println("What color do you like?");
+                String colorChoiced = scan.nextLine();
+
+                boolean isWireless = false;
+                boolean validChoice = false;
+
+                while(!validChoice) {
+                    System.out.println("Is it a wireless headphone? press 1 for YES or 2 for NO");
+                    int choice = scan.nextInt();
+                    scan.nextLine();
+
+                    if (choice == 1) {
+                        isWireless = true;
+                        validChoice = true;
+                    } else if (choice == 2) {
+                        isWireless = false;
+                        validChoice = true;
+                    } else {
+                        System.out.println("Invalid input, please press 1 for YES or 2 for NO");
+
+                    }
+                }
+                // new Headphones
+                Headphones earphones = new Headphones(myProductName, myProductDescription, myProductPrice, myProductVat, colorChoiced, isWireless );
+                System.out.println(earphones.toString());
             }
             case "3" -> {
-                System.out.println("Option 3: ");
-                System.out.println("Smartphone");
+                System.out.println("What's the imei number");
+                int imeiChoosed = scan.nextInt();
+                scan.nextLine();
+
+                System.out.println("What memory size would you like?");
+                int memoryChoosed = scan.nextInt();
+                scan.nextLine();
+
+                // new Smartphone
+                Smartphone mobile = new Smartphone(myProductName, myProductDescription, myProductPrice, myProductVat, imeiChoosed, memoryChoosed );
+                System.out.println(mobile.toString());
             }
             default -> System.out.println("Invalid input");
         }
