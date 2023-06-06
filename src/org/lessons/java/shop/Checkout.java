@@ -12,11 +12,11 @@
 
 //Utilizzate l’ereditarietà per riutilizzare il codice di Prodotto nella stesura delle classi che gestiscono i vari sotto tipi di prodotto. ✅
 //Create una classe Carrello con metodo main, ✅
-//in cui chiedete all’utente di valorizzare un carrello di prodotti con dati inseriti tramite scanner.
-// Durante la richiesta di valorizzazione chiedete all’utente se sta inserendo uno Smarphone o un Televisore o Cuffie
-// e in base alla scelta dell’utente utilizzate il costruttore opportuno.
-// Al termine dell’inserimento stampate il riepilogo del carrello
-// (fate l’override del metodo toString per restituire le informazioni da stampare per ogni classe)
+//in cui chiedete all’utente di valorizzare un carrello di prodotti con dati inseriti tramite scanner. ✅
+// Durante la richiesta di valorizzazione chiedete all’utente se sta inserendo uno Smarphone o un Televisore o Cuffie ✅
+// e in base alla scelta dell’utente utilizzate il costruttore opportuno. ✅
+// Al termine dell’inserimento stampate il riepilogo del carrello ❌
+// (fate l’override del metodo toString per restituire le informazioni da stampare per ogni classe) ✅
 
 //BONUS:
 // Aggiungete alla classe Prodotto un metodo per il calcolo del prezzo scontato per clienti con tessera fedeltà, che applica al prezzo uno sconto del 2%.
@@ -34,6 +34,7 @@ public class Checkout {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
+
         // Scelta prodotto
         System.out.print("What type of product do you want to add to your shopping cart?\n 1-Tv 2-Headphones 3-Smartphone  ");
         String myProductChoice = scan.nextLine();
@@ -46,26 +47,31 @@ public class Checkout {
         String myProductDescription = scan.nextLine();
 
         System.out.print("What is your product's price?  ");
-        int myProductPrice = scan.nextInt();
-        scan.nextLine(); // toglie il carattere invio (Grazie Francesco!!)
+        // int myProductPrice = scan.nextInt();
+        // scan.nextLine(); // toglie il carattere invio che rimane in buffering e viene letto dall' input successivo (Grazie Francesco!!)
+        int myProductPrice = Integer.parseInt(scan.nextLine());
+
 
         System.out.print("What is your product's vat percentage?  ");
-        int myProductVat = scan.nextInt();
-        scan.nextLine();
+        // int myProductVat = scan.nextInt();
+        // scan.nextLine();
+        int myProductVat = Integer.parseInt(scan.nextLine());
 
         switch (myProductChoice) {
             case "1" -> {
                 System.out.print("add your inch size:  ");
-                int dimensionChoiced = scan.nextInt();
-                scan.nextLine();
+                // int dimensionChoiced = scan.nextInt();
+                // scan.nextLine();
+                int dimensionChoiced = Integer.parseInt(scan.nextLine());
 
                 boolean isSmart = false;
                 boolean validChoice = false;
 
                 while(!validChoice) {
-                    System.out.println("Is it a Smart Tv? press 1 for YES or 2 for NO");
-                    int choice = scan.nextInt();
-                    scan.nextLine();
+                    System.out.print("Is it a Smart Tv? press 1 for YES or 2 for NO  ");
+                    // int choice = scan.nextInt();
+                    // scan.nextLine();
+                    int choice = Integer.parseInt(scan.nextLine());
 
                     if(choice == 1) {
                         isSmart = true;
@@ -110,17 +116,17 @@ public class Checkout {
                 System.out.println(earphones.toString());
             }
             case "3" -> {
-                System.out.println("What's the imei number");
+                System.out.print("What's the imei number?  ");
                 int imeiChoosed = scan.nextInt();
                 scan.nextLine();
 
-                System.out.println("What memory size would you like?");
+                System.out.print("What memory size would you like?  ");
                 int memoryChoosed = scan.nextInt();
                 scan.nextLine();
 
                 // new Smartphone
                 Smartphone mobile = new Smartphone(myProductName, myProductDescription, myProductPrice, myProductVat, imeiChoosed, memoryChoosed );
-                System.out.println(mobile.toString());
+                // System.out.println(mobile.toString());
             }
             default -> System.out.println("Invalid input");
         }
