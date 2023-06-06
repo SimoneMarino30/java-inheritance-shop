@@ -91,4 +91,15 @@ public class Product {
         }
         return myCode;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", vatNumber=" + vatNumber +
+                '}';
+    }
 }
